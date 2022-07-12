@@ -16,7 +16,7 @@ options.add_experimental_option("excludeSwitches", ["enable-logging"])
 options.add_argument("window-size=1000,1000")
 options.add_argument("no-sandbox") 
 # 여러개의 탭을 띄우면 각 탭마다 프로그램이 돌아감, sandbox는 각 탭마다 프로그램을 따로 돌리는 격리, no-sandbox는 이걸 사용하지 않음
-#options.add_argument("headless") # 제어하는 크롬창을 띄우지 않음
+# options.add_argument("headless") # 제어하는 크롬창을 띄우지 않음
 
 chrome = webdriver.Chrome("./chromedriver",options=options)
 
@@ -28,12 +28,18 @@ time.sleep(1)
 # print(el)
 
 wait = WebDriverWait(chrome, 10)
+
 def find(wait,CSS_selector):
     return wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,CSS_selector)))
 
 search = find(wait,"input._searchInput_search_input_QXUFf")
-search.click()
-search.send_keys('search',Keys.ENTER)
+# search.send_keys('아이폰 케이스',Keys.ENTER)
+search.send_keys('아이폰 케이스\n') 
+# selenium은 \n으로 줄바꿈이 나올 경우 자동으로 Enter를 하기 때문에 Keys.ENTER를 안하고 줄바꿈으로 해도 엔터가 됨
+
+# button = find(wait,"button._searchInput_button_search_1n1aw")
+# button.click()
 
 time.sleep(1)
+
 chrome.close()
