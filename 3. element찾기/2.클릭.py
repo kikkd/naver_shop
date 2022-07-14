@@ -32,6 +32,8 @@ wait = WebDriverWait(chrome, 10)
 def find(wait,CSS_selector):
     return wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,CSS_selector)))
 
+
+
 search = find(wait,"input._searchInput_search_input_QXUFf")
 search.send_keys('아이폰 케이스\n') 
 # search.send_keys('아이폰 케이스',Keys.ENTER)
