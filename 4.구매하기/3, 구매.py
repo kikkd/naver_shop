@@ -20,6 +20,8 @@ chrome.get("https://shopping.naver.com/home/p/index.naver")
 def wait1(CSS_selector):
     return wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,CSS_selector)))
 
+
+##### 로그인 #####
 login_button = wait1("a#gnb_login_button").click()
 
 input_id = wait1("input#id")
@@ -42,8 +44,32 @@ input_pw.send_keys("\n")
 # input_pw.send_keys("pw")
 # input_pw.send_keys("\n")
 
-wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"a#gnb_btn_login")))
 
-time.sleep(3)
+wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,"a#gnb_logout_button")))
+##### 로그인 #####
+
+##### 검색 #####
+search = wait1("input._searchInput_search_input_QXUFf")
+search.send_keys("아이폰 케이스")
+time.sleep(1)
+search.send_keys("\n")
+
+##### 검색 #####
+
+# <a.href="" class="logout_botton"></a>
+# a.logout_botton
+# a[class="logout_botton"]
+# a[class^="logout"]
+# a[class$="logout"]
+# a[class*="out_bot"]
+
+##### 검색 결과 크롤링 #####
+wait1("a[class^=basicList_link__]")
+titles = chrome.find_elements(By.CSS_SELECTOR,"a[class^=basicList_link__]")
+for title in titles:
+    print(title.text)
+##### 검색 결과 크롤링 #####
+
+time.sleep(100)
 
 chrome.close()
