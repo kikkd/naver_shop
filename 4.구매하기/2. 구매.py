@@ -14,9 +14,8 @@ short_wait = WebDriverWait(chrome,3)
 
 chrome.get("https://shopping.naver.com/home/p/index.naver")
 
-def wait1(tag):
-    a = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,tag)))
-    return a
+def wait1(CSS_selector):
+    return wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,CSS_selector)))
 
 login_button = wait1("a#gnb_login_button").click()
 
@@ -35,8 +34,8 @@ input_id.send_keys(Keys.CONTROL,"v")
 pyperclip.copy("pw")
 input_pw.send_keys(Keys.CONTROL,"v")
 input_pw.send_keys("\n")
-# input_id.send_keys("whddls6666")
-# input_pw.send_keys("dasom1036!d")
+# input_id.send_keys("id")
+# input_pw.send_keys("pw")
 # input_pw.send_keys("\n")
 
 wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR,"a#gnb_btn_login")))
