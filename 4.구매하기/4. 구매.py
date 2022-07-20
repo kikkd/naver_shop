@@ -53,8 +53,16 @@ search = wait1("input._searchInput_search_input_QXUFf")
 search.send_keys("아이폰 케이스")
 time.sleep(1)
 search.send_keys("\n")
-
 ##### 검색 #####
+
+##### 스크롤 추가 #####
+# 스크립트 이용하기, 자바 스크립트를 이용하여 스크롤을 내림
+# 자바스크립트를 사용시키기 위해 execute_script()를 사용함
+for i in range(8):
+    chrome.execute_script("window.scrollBy(0, 100000)")
+    time.sleep(1)
+# chrome.execute_script("window.scrollBy(0, document.body.scrollHeight)")
+##### 스크롤 추가 #####
 
 # <a.href="" class="logout_botton"></a>
 # a.logout_botton
@@ -64,11 +72,20 @@ search.send_keys("\n")
 # a[class*="out_bot"]
 
 ##### 검색 결과 크롤링 #####
-wait1("a[class^=basicList_link__]")
-titles = chrome.find_elements(By.CSS_SELECTOR,"a[class^=basicList_link__]")
-for title in titles:
-    print(title.text)
+# 광고 삭제 추가
+wait1("div[class^=basicList_info_area__]")
+items = chrome.find_elements(By.CSS_SELECTOR,"div[class^=basicList_info_area__]")
+
+
+for item in items:
+    try:
+        item.find_element(By.CSS_SELECTOR,"button[class^=ad_ad_stk]")
+        continue
+    except:
+        pass
+    print(item.find_element(By.CSS_SELECTOR,"a[class^=basicList_link__]").text)
 ##### 검색 결과 크롤링 #####
+
 
 time.sleep(3)
 
