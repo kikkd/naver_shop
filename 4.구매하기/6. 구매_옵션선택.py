@@ -12,8 +12,8 @@ chrome = webdriver.Chrome("./chromedriver.exe")
 wait = WebDriverWait(chrome,10)
 short_wait = WebDriverWait(chrome,3)
 
-id = ""
-pw = ""
+id = "whddls6666"
+pw = "dasom1036!d"
 
 chrome.get("https://shopping.naver.com/home/p/index.naver")
 
@@ -52,6 +52,8 @@ search.send_keys("\n")
 ##### 검색 #####
 
 ##### 첫번째 상품 클릭 #####
+wait.until(EC.visibility_of_any_elements_located((By.CSS_SELECTOR,"a[class^=basicList_link__]")))[2].click()
+
 wait1("a[class^=basicList_link__]").click()
 
 time.sleep(2)
@@ -88,6 +90,16 @@ for i in options:
 
 time.sleep(10)
 chrome.quit() # 브라우저 끄기
+
+
+
+
+# ##### 두번째 상품 클릭 #####
+# wait1("a[class^=basicList_link__]").click
+# ### 상품상세 페이지 ###
+# ## 옵션 선택
+# ## 구매 하기
+# wait1
 
 
 ##### 스크롤 추가 #####
