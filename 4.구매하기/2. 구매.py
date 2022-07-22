@@ -12,8 +12,8 @@ chrome = webdriver.Chrome("./chromedriver.exe")
 wait = WebDriverWait(chrome,10)
 short_wait = WebDriverWait(chrome,3)
 
-id = "whddls6666"
-pw = "dasom1036!d"
+id = " "
+pw = " "
 
 chrome.get("https://shopping.naver.com/home/p/index.naver")
 
