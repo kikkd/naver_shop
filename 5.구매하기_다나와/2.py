@@ -1,5 +1,3 @@
-from sre_constants import CATEGORY
-from unicodedata import category
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -57,6 +55,15 @@ find_visible(Category_css["CPU"]).click()
 # find_visible("dd.category_873").click()
 # cpu.click()
 time.sleep(1)
+
+# CPU 제조사 불러오기
+options = finds_visible("div[class=search_option_list] div[class=search_option_item]:nth-child(2) label[class=item_checkbox] span[class=item_text]")
+more_options = finds_visible("div[class=search_option_list] div[class=search_option_item] div[class=search_cate_contents] button[class=btn_item_more]")
+more_options[0].click()
+options[10].click()
+
+for o in options:
+    print(o.text)
 
 
 
