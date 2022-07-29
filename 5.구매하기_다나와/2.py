@@ -35,8 +35,6 @@ def left_frame():
     find_visible("iframe#ifrmProduct")
     chrome.switch_to.frame("ifrmProduct")
 
-
-
 # cpu, 메인보드, 메모리, 그래픽카드, ssd, 케이스, 파워
 # cpu 한번 클릭
 
@@ -54,6 +52,7 @@ Category_css = {
     c:"dd.category_"+Category[c]+" a" for c in Category
     # "CPU" : "dd.category_"+Category["메인보드"]+" a",
 }
+
 print(Category_css)
 
 chrome.get("https://shop.danawa.com/virtualestimate/?controller=estimateMain&methods=index&marketPlaceSeq=16")
