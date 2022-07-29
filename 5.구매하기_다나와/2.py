@@ -82,8 +82,6 @@ for i in range(len(options)):
 # for o in options:
 #     print(o.text)
 
-
-
 time.sleep(3)
 chrome.close()
 
