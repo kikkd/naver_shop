@@ -43,6 +43,18 @@ def choose_one(text, opsions):
     chooses = input("=> ")
     return int(chooses) - 1
 
+def parse_product():
+    # left_frame()
+    products = []
+    for p in finds_visible("div[class=scroll_box] tr[class^=productList_]"):
+        name = p.find_element(By.CSS_SELECTOR,"p.subject a").text
+        try:
+            price = p.find_element(By.CSS_SELECTOR,"span.prod_price").text
+        except:
+            # price = "판매준비"
+            continue
+        products.append((name, price))
+    return products
 
 # cpu, 메인보드, 메모리, 그래픽카드, ssd, 케이스, 파워
 # cpu 한번 클릭
@@ -139,6 +151,27 @@ elif i == 1:
     print(options[i].text)
     options[i].click()
 
+### CPU 목록 선택하기
+# 상품명
+# div[class=scroll_box] tr[class^=productList_] p.subject a
+# 가격
+# div.scroll_box tr[class^=productList_] span.prod_price
+time.sleep(1)
+# products = finds_visible("div[class=scroll_box] tr[class^=productList_]")
+# cpus = []
+# for p in products:
+#     name = p.find_element(By.CSS_SELECTOR,"p.subject a").text
+#     try:
+#         price = p.find_element(By.CSS_SELECTOR,"span.prod_price").text
+#     except:
+#         # price = "판매준비"
+#         continue
+#     cpus.append((name, price))
+
+cpus = parse_product()
+for cpu in cpus:
+    print(cpu)   
+    
 time.sleep(3)
 chrome.close()
 
