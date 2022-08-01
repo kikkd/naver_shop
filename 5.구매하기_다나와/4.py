@@ -35,6 +35,13 @@ def left_frame():
     find_visible("iframe#ifrmProduct")
     chrome.switch_to.frame("ifrmProduct")
 
+def opsion(i):
+    str(i)
+    options = finds_visible(f"div[class=search_option_list] div[class=search_option_item]:nth-child({i}) label[class=item_checkbox] span[class=item_text]")
+    more_options = finds_visible("div[class=search_option_list] div[class=search_option_item] div[class=search_cate_contents] button[class=btn_item_more]")
+    more_options[0].click()
+    return options
+
 def choose_one(text, opsions):
     print("----------------")
     print(text)
@@ -114,13 +121,6 @@ i = choose_one("종류를 선택 해 주세요")
 # CPU 제조사 불러오기
 ###
 # left_frame()
-
-def opsion(i):
-    str(i)
-    options = finds_visible(f"div[class=search_option_list] div[class=search_option_item]:nth-child({i}) label[class=item_checkbox] span[class=item_text]")
-    more_options = finds_visible("div[class=search_option_list] div[class=search_option_item] div[class=search_cate_contents] button[class=btn_item_more]")
-    more_options[0].click()
-    return options
 
 ### CPU 선택
 options = opsion(1)
