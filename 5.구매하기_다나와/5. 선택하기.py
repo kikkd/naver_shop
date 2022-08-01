@@ -11,6 +11,8 @@ chrome = webdriver.Chrome("./chromedriver.exe")
 wait = WebDriverWait(chrome,10)
 short_wait = WebDriverWait(chrome,3)
 
+##### 카테고리 딕셔너리 #####
+#=========================================================================================================================
 Category = {
     "CPU" : "873",
     "메인보드" : "875",
@@ -25,7 +27,10 @@ Category_css = {
     c:"dd.category_"+Category[c]+" a" for c in Category
     # "CPU" : "dd.category_"+Category["메인보드"]+" a",
 }
+#=========================================================================================================================
 
+##### 함수 #####
+#=========================================================================================================================
 def find_present(CSS):
     return wait.until(EC.presence_of_element_located((By.CSS_SELECTOR,CSS)))
 
@@ -111,6 +116,16 @@ def get_opsion(title):
     # left_frame()
     return finds_visible(f"select[title='{title}'] option:not[vlaue='']")
 
+def choice_cos(te, op):
+    print("----------------")
+    print(f"{te} 선택")
+    options = opsion(op)
+    i = choose_one(f"{te} 선택 해 주세요", [x.text for x in options])
+    print(options[i].text)
+    options[i].click()
+#=========================================================================================================================
+
+
 # cpu, 메인보드, 메모리, 그래픽카드, ssd, 케이스, 파워
 # cpu 한번 클릭
 
@@ -118,7 +133,8 @@ def get_opsion(title):
 
 chrome.get("https://shop.danawa.com/virtualestimate/?controller=estimateMain&methods=index&marketPlaceSeq=16")
 
-###
+##### CPU 선택 #####
+#=========================================================================================================================
 # right_frame():
 # CPU 카테고리 클릭
 # find_visible(Category_css["CPU"]).click()
@@ -149,8 +165,6 @@ elif i == 1:
 options = finds_visible(f"slect[title='{title}'] option:not([value=''])")
 i = choose_one("종류를 선택 해 주세요")
 '''
-
-
 
 # CPU 제조사 불러오기
 ###
@@ -210,8 +224,11 @@ elif maker_idx == 1:
 cpus = parse_product()
 # for cpu in cpus:
 #     print(cpu)   
+#=========================================================================================================================
+
 
 ##### 메인보드 #####
+#=========================================================================================================================
 go_to_category("메인보드")
 
 choose_maker("메인보드 제조사를 골라 주세요.")
@@ -231,8 +248,11 @@ elif is_amd:
 
 ## 메인보드 목록 가져오기
 mainboards = parse_product()
+#=========================================================================================================================
+
 
 ##### 메모리 #####
+#=========================================================================================================================
 go_to_category("메모리")
 
 choose_maker("메모리 제조사를 골라 주세요")
@@ -249,17 +269,12 @@ options = opsion(3)
 options[1].click()
 print("=> DDR4 선택 완료")
 
-print("----------------")
-print("메모리 용량 선택")
-options = opsion(4)
-i = choose_one("메모리 용량을 선택 해 주세요", [x.text for x in options])
-print(options[i].text)
-options[i].click()
-
+choice_cos("메모리 용량",4)
 mamoris = parse_product()
+#=========================================================================================================================
 
 ##### 그래픽 카드 #####
-
+#=========================================================================================================================
 # 그래픽 카드
 go_to_category("그래픽카드")
 
@@ -289,45 +304,35 @@ print(options[i].text)
 options[i].click()
 
 graphics = parse_product()
+#=========================================================================================================================
+
 
 ##### SSD #####
+#=========================================================================================================================
 # 그래픽 카드
 go_to_category("SSD")
 
 choose_maker("SSD 제조사를 골라 주세요")
 
-print("----------------")
-print("SSD 용량 선택")
-options = opsion(5)
-i = choose_one("용량을 선택 해 주세요", [x.text for x in options])
-print(options[i].text)
-options[i].click()
+choice_cos("SSD 용량",5)
 
 ssds = parse_product()
+#=========================================================================================================================
 
 ##### 케이스 #####
+#=========================================================================================================================
 # 케이스
 go_to_category("케이스")
-
 choose_maker("케이스 제조사를 골라 주세요")
+choice_cos("제품 분류", 2)
+choice_cos("지원 파워 규격",4)
 
-print("----------------")
-print("제품 분류 선택")
-options = opsion(2)
-i = choose_one("제품 분류 선택 해 주세요", [x.text for x in options])
-print(options[i].text)
-options[i].click()
-
-print("----------------")
-print("지원 파워 규격 선택")
-options = opsion(4)
-i = choose_one("지원 파워 규격을 선택 해 주세요", [x.text for x in options])
-print(options[i].text)
-options[i].click()
 
 cases = parse_product()
+#=========================================================================================================================
 
 # cpus mainboards mamoris graphics ssds cases
+# print(cpus,mainboards,mamoris,graphics,ssds,cases)
 time.sleep(3)
 chrome.close()
 
