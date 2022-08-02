@@ -7,7 +7,7 @@ import time
 import os
 
 options = webdriver.ChromeOptions()
-options.headless = True
+options.headless = True # headless로 화면이 켜지지 않게 한다. 설정한 options을 webdriver에 적용해야만 실제로 적용됨
 
 chrome = webdriver.Chrome("./chromedriver.exe",options=options)
 wait = WebDriverWait(chrome,10)
@@ -45,12 +45,14 @@ e = find_visible("li[data-cr-rank='1']")
 
 chrome.execute_script("""document.querySelector('li[data-cr-rank="1"]').setAttribute("style","border:10px solid red")""")
 # print(e.text)
-# e.screenshot("./test.png") # 해당 엘리먼트만 스크린샷
+# e.screenshot("./test.png") # 해당 엘리먼트를 스크린샷
 
 chrome.set_window_size(1000,10000)
-chrome.save_screenshot("./test1.png") # 크롬창 스크린샷
+chrome.save_screenshot("./test1.png") # 크롬창을 스크린샷
 
-bodys = find_visible("body")
+bodys = find_visible("body") # 전체 body를 css selector로 잡아 전체 화면을 스크린샷함
 bodys.screenshot("./test2.png")
+#=========================================================================================================================
+
 
 chrome.quit()
