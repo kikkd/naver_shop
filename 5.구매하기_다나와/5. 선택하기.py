@@ -1,4 +1,3 @@
-from itertools import count
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -92,6 +91,9 @@ def go_to_category(category_name):
         except:
             pass
         # more_options[i].click()
+    print("================")
+    print(f"{category_name}")
+    print("================")
     time.sleep(1)
 
 def opsion(i):
@@ -325,8 +327,126 @@ choice_cos("지원 파워 규격",4)
 cases = parse_product()
 #=========================================================================================================================
 
+##### 파워 #####
+#=========================================================================================================================
+# 파워
+go_to_category("파워")
+choose_maker("파워 제조사를 골라 주세요")
+choice_cos("제품 분류", 2)
+choice_cos("정격 출력", 3)
+choice_cos("80PLUS인증",4)
+powers = parse_product()
+#=========================================================================================================================
+
+# 인기조합
+#=========================================================================================================================
+papular={
+    "CPU" : cpus[0],
+    "메인보드" : mainboards[0],
+    "메모리" : mamoris[0],
+    "그래픽카드" : graphics[0],
+    "SSD" : ssds[0],
+    "케이스" : cases[0],
+    "파워" : powers[0],
+}
+papular_total = int(papular["CPU"][1].replace(",",""))+int(papular["메인보드"][1].replace(",",""))+int(papular["메모리"][1].replace(",",""))+int(papular["그래픽카드"][1].replace(",",""))+int(papular["SSD"][1].replace(",",""))+int(papular["케이스"][1].replace(",",""))+int(papular["파워"][1].replace(",",""))
+
+print(f'''
+인기 1위 조합입니다.
+CPU : {papular["CPU"]}
+메인보드 : {papular["메인보드"]}
+메모리 : {papular["메모리"]}
+그래픽카드 : {papular["그래픽카드"]}
+SSD : {papular["SSD"]}
+케이스 : {papular["케이스"]}
+파워 : {papular["파워"]}
+총 가격 : {papular_total} 원
+''')
+#=========================================================================================================================
+
+#가성비
+#=========================================================================================================================
+# 가장 싼 CPU
+# chip = 999999999999
+# for c in cpus:
+#     if chip > c[1]:
+#         chip=c[1]
+
+# cpu = min(x[1] for x in cpus)
+# price만 들어가게 됨
+# chip_idx = 0
+# for i in range(len(cpus)):
+#     chip = cpus[chip_idx]
+#     cpu = cpus[i]
+#     if cpu[1] < chip[1]:
+#         chip_idx = i
+# chip_idx = ? 가장싼 price의 인덱스 찾기
+
+def find_chip(arr):
+    chip_idx = 0
+    for i in range(len(arr)):
+        chip = arr[chip_idx]
+        a = arr[i]
+        if int(a[1].replace(",","")) < int(chip[1].replace(",","")):
+            chip_idx = i
+    return arr[chip_idx]
+
+recommand={
+    "CPU" : find_chip(cpus),
+    "메인보드" : find_chip(mainboards),
+    "메모리" : find_chip(mamoris),
+    "그래픽카드" : find_chip(graphics),
+    "SSD" : find_chip(ssds),
+    "케이스" : find_chip(cases),
+    "파워" : find_chip(powers),
+}
+recommand_total = int(recommand["CPU"][1].replace(",",""))+int(recommand["메인보드"][1].replace(",",""))+int(recommand["메모리"][1].replace(",",""))+int(recommand["그래픽카드"][1].replace(",",""))+int(recommand["SSD"][1].replace(",",""))+int(recommand["케이스"][1].replace(",",""))+int(recommand["파워"][1].replace(",",""))
+
+# recommand={
+#     "CPU" : cpus[0],
+#     "메인보드" : mainboards[0],
+#     "메모리" : mamoris[0],
+#     "그래픽카드" : graphics[0],
+#     "SSD" : ssds[0],
+#     "케이스" : cases[0],
+#     "파워" : powers[0],
+# }
+
+print(f'''
+가성비 조합입니다.
+CPU : {recommand["CPU"]}
+메인보드 : {recommand["메인보드"]}
+메모리 : {recommand["메모리"]}
+그래픽카드 : {recommand["그래픽카드"]}
+SSD : {recommand["SSD"]}
+케이스 : {recommand["케이스"]}
+파워 : {recommand["파워"]}
+총 가격 : {recommand_total} 원
+''')
+#=========================================================================================================================
+
 # cpus mainboards mamoris graphics ssds cases
-# print(cpus,mainboards,mamoris,graphics,ssds,cases)
+print("CPU")
+print(cpus)
+
+print("메인보드")
+print(mainboards)
+
+print("메모리")
+print(mamoris)
+
+print("그래픽 카드")
+print(graphics)
+
+print("SSD")
+print(ssds)
+
+print("케이스")
+print(cases)
+
+print("파워")
+print(powers)
+
 time.sleep(3)
 chrome.close()
 
