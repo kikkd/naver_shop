@@ -15,7 +15,6 @@ stealth(chrome,
         fix_hairline=True,
         )
 
-
 url = "https://intoli.com/blog/not-possible-to-block-chrome-headless/chrome-headless-test.html"
 chrome.get(url)
 
