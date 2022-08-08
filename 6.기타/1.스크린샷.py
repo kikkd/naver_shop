@@ -44,14 +44,14 @@ e = find_visible("li[data-cr-rank='1']")
 # chrome.execute_script("document.querySelector(\"li[data-cr-rank=\"1\"]\").setAttribute(\"style\",\"border:10px solid red\")")
 
 chrome.execute_script("""document.querySelector('li[data-cr-rank="1"]').setAttribute("style","border:10px solid red")""")
-# print(e.text)
-# e.screenshot("./test.png") # 해당 엘리먼트를 스크린샷
+print(e.text)
+e.screenshot("./test1.png") # 해당 엘리먼트를 스크린샷
 
 chrome.set_window_size(1000,10000)
-chrome.save_screenshot("./test1.png") # 크롬창을 스크린샷
+chrome.save_screenshot("./test2.png") # 크롬창을 스크린샷
 
 bodys = find_visible("body") # 전체 body를 css selector로 잡아 전체 화면을 스크린샷함
-bodys.screenshot("./test2.png")
+bodys.screenshot("./test3.png")
 #=========================================================================================================================
 
 
